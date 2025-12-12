@@ -260,27 +260,15 @@ export default {
     async fetchSummaryData() {
       this.loadingSummary = true
       try {
-        // Try proxy first (development), fallback to direct API (production/static)
-        let apiUrl = '/api/latest'
-        let response = await fetch(apiUrl, {
+        // Fetch directly from API (static build compatible)
+        const apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
+        const response = await fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
         })
-        
-        // If proxy fails, try direct API
-        if (!response.ok) {
-          apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
-          response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }
-          })
-        }
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -289,7 +277,7 @@ export default {
         const result = await response.json()
         const accountNumber = '263221138'
         
-        if (result[accountNumber]) {
+        if (result && result[accountNumber]) {
           const accountData = result[accountNumber]
           
           // Update from real-time API data
