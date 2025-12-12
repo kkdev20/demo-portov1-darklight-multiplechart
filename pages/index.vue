@@ -260,9 +260,9 @@ export default {
     async fetchSummaryData() {
       this.loadingSummary = true
       try {
-        // Fetch directly from API (static build compatible)
-        const apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
-        const response = await fetch(apiUrl, {
+        // Try proxy first (development), then direct API (production if CORS enabled)
+        let apiUrl = '/api/latest'
+        let response = await fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
@@ -270,11 +270,33 @@ export default {
           }
         })
         
+        // Check if response is valid JSON (not HTML)
+        const contentType = response.headers.get('content-type')
+        if (!contentType || !contentType.includes('application/json')) {
+          // Proxy not working, try direct API (might fail due to CORS, but worth trying)
+          apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
+          response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+        }
+        
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
         }
         
-        const result = await response.json()
+        const text = await response.text()
+        let result
+        try {
+          result = JSON.parse(text)
+        } catch (e) {
+          // If not JSON, it's probably HTML from Nuxt - skip
+          return
+        }
+        
         const accountNumber = '263221138'
         
         if (result && result[accountNumber]) {
