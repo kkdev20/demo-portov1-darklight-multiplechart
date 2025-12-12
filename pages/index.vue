@@ -210,11 +210,11 @@ export default {
   data() {
     return {
       summary: {
-        total_equity: 12116.91,
-        total_balance: 12096.00,
-        total_profit: 1871.81
+        total_equity: 0,
+        total_balance: 0,
+        total_profit: 0
       },
-      totalProfit: 1871.81,
+      totalProfit: 0,
       accounts: [
         {
           id: 1,
