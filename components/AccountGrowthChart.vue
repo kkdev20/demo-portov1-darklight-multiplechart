@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-3 sm:p-4 mt-4">
       <!-- Header -->
       <div class="flex items-center justify-between mb-3 sm:mb-4">
@@ -56,7 +57,6 @@
       <div class="relative" style="height: 300px;">
         <canvas ref="chartCanvas"></canvas>
       </div>
-      
     </div>
 
     <!-- Empty State -->
@@ -66,6 +66,11 @@
       </svg>
       <p class="mt-4 text-sm text-gray-600">No trading data available</p>
     </div>
+  </div>
+  <!-- Watermark -->
+  <div class="text-center mt-2">
+    <p class="text-xs text-gray-400 font-medium">wistack.site</p>
+  </div>
   </div>
 </template>
 

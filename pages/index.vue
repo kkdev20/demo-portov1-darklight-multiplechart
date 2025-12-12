@@ -11,7 +11,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
               </svg>
             </div>
-            <span class="header-logo-text ml-1 sm:ml-2 font-bold text-gray-900">Equity Monitor</span>
+            <span class="header-logo-text ml-1 sm:ml-2 font-bold text-gray-900">Portfolio Analytics</span>
           </div>
           
           <!-- Right Section -->
@@ -51,7 +51,7 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6">
       <!-- Tor Monitor Ketua CTA -->
       <div class="relative overflow-hidden mb-4 sm:mb-6">
-        <div class="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl animate-float" style="animation: float 3s ease-in-out infinite;">
+        <div class="relative bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl animate-float" style="animation: float 3s ease-in-out infinite;">
           <!-- Shimmer Effect -->
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" 
                style="background-size: 200% 100%; animation: shimmer 3s infinite linear;"></div>
@@ -70,51 +70,50 @@
             <div class="text-white mb-4 md:mb-0">
               <div class="flex items-center space-x-2 mb-1.5">
                 <div class="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white/20 backdrop-blur-sm"></div>
-                <span class="text-[10px] sm:text-xs font-semibold tracking-wider">EXCLUSIVE ACCESS</span>
+                <span class="text-[10px] sm:text-xs font-semibold tracking-wider">ENTERPRISE SOLUTION</span>
               </div>
               <h2 class="text-base sm:text-lg md:text-xl font-bold mb-1.5">
-                TOR MONITOR <span class="text-yellow-300">KETUA</span>
+                PORTFOLIO MONITORING <span class="text-blue-200">PLATFORM</span>
               </h2>
-              <p class="text-white/90 text-[10px] sm:text-xs md:text-sm max-w-2xl">
-                Real-time monitoring of equity, balance, and account performance.
+              <p class="text-white/90 text-[9px] sm:text-[10px] md:text-xs max-w-2xl">
+                Advanced real-time portfolio analytics and performance monitoring for institutional investors and fund managers.
               </p>
             </div>
             
-            <button @click="scrollToAccounts" 
-                    class="relative group px-3 py-1.5 sm:px-4 sm:py-2 bg-white text-indigo-600 font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 animate-pulse-cta"
-                    style="animation: pulse-cta 2s infinite;">
-              <div class="flex items-center space-x-1.5">
-                <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
-                </svg>
-                <span class="text-[10px] sm:text-xs md:text-sm">To The Moon</span>
-              </div>
-              <div class="absolute -inset-1 bg-white/30 rounded-lg sm:rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <button @click="scrollToChart" 
+                    class="relative group px-4 py-2 sm:px-5 sm:py-2.5 bg-white text-blue-700 font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl hover:bg-blue-50 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex items-center space-x-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+              <span class="text-xs sm:text-sm font-bold whitespace-nowrap">View Dashboard</span>
+              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+              </svg>
             </button>
           </div>
           
           <!-- Stats Indicator -->
           <div class="relative z-10 mt-4 sm:mt-6 flex flex-wrap items-center justify-center gap-2 sm:gap-4">
             <div class="flex items-center space-x-1 sm:space-x-2 text-white/80">
-              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-green-400 animate-pulse"></div>
-              <span class="text-[10px] sm:text-xs">Live Updates</span>
+              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-emerald-400 animate-pulse"></div>
+              <span class="text-[10px] sm:text-xs">Real-Time Analytics</span>
             </div>
             <div class="h-3 sm:h-4 w-px bg-white/30 hidden xs:block"></div>
             <div class="flex items-center space-x-1 sm:space-x-2 text-white/80">
-              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-400"></div>
-              <span class="text-[10px] sm:text-xs">Multi-Account</span>
+              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-cyan-400"></div>
+              <span class="text-[10px] sm:text-xs">Multi-Portfolio Management</span>
             </div>
             <div class="h-3 sm:h-4 w-px bg-white/30 hidden xs:block"></div>
             <div class="flex items-center space-x-1 sm:space-x-2 text-white/80">
-              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-purple-400"></div>
-              <span class="text-[10px] sm:text-xs">Real-time Alerts</span>
+              <div class="h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-blue-300"></div>
+              <span class="text-[10px] sm:text-xs">Intelligent Alerts</span>
             </div>
           </div>
         </div>
         
         <!-- Floating Elements -->
-        <div class="absolute top-3 right-3 sm:top-4 sm:right-4 w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-yellow-400/30 animate-bounce" style="animation-delay: 0.2s;"></div>
-        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-blue-400/30 animate-bounce" style="animation-delay: 0.5s;"></div>
+        <div class="absolute top-3 right-3 sm:top-4 sm:right-4 w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-blue-300/30 animate-bounce" style="animation-delay: 0.2s;"></div>
+        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-8 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-indigo-300/30 animate-bounce" style="animation-delay: 0.5s;"></div>
       </div>
 
       <!-- Stats Grid -->
@@ -183,7 +182,7 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-xs font-medium text-gray-600">Account</p>
-              <p class="text-sm font-semibold text-gray-900 mt-1">263221138</p>
+              <p class="text-sm font-semibold text-gray-900 mt-1">26322***8</p>
               <div class="flex items-center mt-0.5">
                 <span class="text-[10px] sm:text-xs text-gray-500 mr-2">USC</span>
                 <span class="flex items-center text-[10px] sm:text-xs text-green-600">
@@ -201,7 +200,9 @@
       </div>
 
       <!-- Account Growth Chart -->
-      <AccountGrowthChart />
+      <div id="dashboard-chart">
+        <AccountGrowthChart />
+      </div>
     </div>
   </div>
 </template>
@@ -338,11 +339,29 @@ export default {
         this.loadingSummary = false
       }
     },
-    scrollToAccounts() {
-      // Scroll to chart section
-      const chartElement = document.querySelector('.bg-white.rounded-xl')
-      if (chartElement) {
-        chartElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    scrollToChart() {
+      // Scroll to chart section using ID
+      const chartSection = document.getElementById('dashboard-chart')
+      
+      if (chartSection) {
+        const elementPosition = chartSection.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - 80 // Offset untuk nav bar
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        })
+      } else {
+        // Fallback: try to find chart by class
+        const chartElement = document.querySelector('.bg-white.rounded-lg.shadow-sm.border.border-gray-200')
+        if (chartElement) {
+          const elementPosition = chartElement.getBoundingClientRect().top + window.pageYOffset
+          const offsetPosition = elementPosition - 80
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }
       }
     },
     detectTimeZone() {
