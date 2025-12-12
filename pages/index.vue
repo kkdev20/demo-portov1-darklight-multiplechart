@@ -260,15 +260,27 @@ export default {
     async fetchSummaryData() {
       this.loadingSummary = true
       try {
-        // Fetch real-time data from latest.json API via proxy
-        const apiUrl = '/api/latest'
-        const response = await fetch(apiUrl, {
+        // Try proxy first (development), fallback to direct API (production/static)
+        let apiUrl = '/api/latest'
+        let response = await fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           }
         })
+        
+        // If proxy fails, try direct API
+        if (!response.ok) {
+          apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
+          response = await fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          })
+        }
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
