@@ -44,7 +44,7 @@ export default {
 
   // Generate configuration for static deployment (SPA mode)
   generate: {
-    fallback: true,
+    fallback: '404.html',
     dir: 'dist'
   },
   
