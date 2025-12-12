@@ -260,13 +260,8 @@ export default {
     async fetchSummaryData() {
       this.loadingSummary = true
       try {
-        const accountNumber = '263221138'
-        const queryParams = new URLSearchParams({
-          uuid: accountNumber,
-          limit: '10000' // Get all trades for accurate calculation
-        })
-        
-        const apiUrl = `/api/history?${queryParams}`
+        // Fetch real-time data from latest.json API
+        const apiUrl = 'https://rancangrinakit.online/kingkin/api/data/latest.json'
         const response = await fetch(apiUrl, {
           method: 'GET',
           headers: {
@@ -280,21 +275,16 @@ export default {
         }
         
         const result = await response.json()
+        const accountNumber = '263221138'
         
-        if (result.status === 'success' && result.data && result.data.length > 0) {
-          // Calculate total profit from all trades
-          const calculatedTotalProfit = result.data.reduce((sum, trade) => {
-            return sum + parseFloat(trade.profit || 0)
-          }, 0)
+        if (result[accountNumber]) {
+          const accountData = result[accountNumber]
           
-          // Calculate total equity = initial balance + total profit
-          const calculatedTotalEquity = this.initialBalance + calculatedTotalProfit
-          
-          // Update data
-          this.totalProfit = calculatedTotalProfit
-          this.summary.total_profit = calculatedTotalProfit
-          this.summary.total_equity = calculatedTotalEquity
-          this.summary.total_balance = this.initialBalance
+          // Update from real-time API data
+          this.summary.total_equity = parseFloat(accountData.equity || 0)
+          this.summary.total_balance = parseFloat(accountData.balance || 0)
+          this.totalProfit = parseFloat(accountData.profit || 0)
+          this.summary.total_profit = parseFloat(accountData.profit || 0)
           
           // Update last update time
           this.lastUpdate = new Date()
