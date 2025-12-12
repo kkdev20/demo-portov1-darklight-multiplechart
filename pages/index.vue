@@ -124,7 +124,8 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-xs font-medium text-gray-600">Total Equity</p>
-              <p class="text-lg sm:text-xl font-bold text-gray-900 mt-1">${{ formatNumber(summary.total_equity) }}</p>
+              <p v-if="loadingSummary && summary.total_equity === 0" class="text-lg sm:text-xl font-bold text-gray-400 mt-1">Loading...</p>
+              <p v-else class="text-lg sm:text-xl font-bold text-gray-900 mt-1">${{ formatNumber(summary.total_equity) }}</p>
               <p class="text-[10px] sm:text-xs text-gray-600 mt-1">Auto-update every 3 hours</p>
             </div>
             <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-lg gradient-primary flex items-center justify-center">
@@ -140,7 +141,8 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-xs font-medium text-gray-600">Total Profit</p>
-              <p class="text-lg sm:text-xl font-bold mt-1" :class="totalProfit >= 0 ? 'text-green-600' : 'text-red-600'">${{ formatNumber(totalProfit) }}</p>
+              <p v-if="loadingSummary && totalProfit === 0" class="text-lg sm:text-xl font-bold text-gray-400 mt-1">Loading...</p>
+              <p v-else class="text-lg sm:text-xl font-bold mt-1" :class="totalProfit >= 0 ? 'text-green-600' : 'text-red-600'">${{ formatNumber(totalProfit) }}</p>
               <p class="text-[10px] sm:text-xs text-gray-600 mt-1">Auto-update every 3 hours</p>
             </div>
             <div class="h-8 w-8 sm:h-9 sm:w-9 rounded-lg gradient-success flex items-center justify-center">
