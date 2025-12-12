@@ -301,7 +301,6 @@ export default {
         }
       } catch (error) {
         // Silent error - keep existing values if API fails
-        console.error('Failed to fetch summary data:', error)
       } finally {
         this.loadingSummary = false
       }
