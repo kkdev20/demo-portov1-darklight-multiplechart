@@ -260,7 +260,7 @@ export default {
     async fetchSummaryData() {
       this.loadingSummary = true
       try {
-        // Try proxy first (development), then direct API (production if CORS enabled)
+        // Try API endpoint (works in both dev with serverMiddleware and production with Vercel function)
         let apiUrl = '/api/latest'
         let response = await fetch(apiUrl, {
           method: 'GET',
