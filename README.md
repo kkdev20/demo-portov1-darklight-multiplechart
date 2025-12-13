@@ -1,6 +1,6 @@
-# MT5 Equity Tor Monitor
+# Portfolio Analytics Platform
 
-Dashboard untuk monitoring equity, balance, dan account performance dengan grafik pertumbuhan akun.
+Advanced real-time portfolio analytics and performance monitoring for institutional investors and fund managers.
 
 ## Tech Stack
 
@@ -35,14 +35,41 @@ npm start
 
 ## Deploy to Vercel
 
-1. Push code ke GitHub repository
-2. Import project di Vercel
-3. Vercel akan auto-detect Nuxt.js dan deploy
+Project sudah siap untuk deploy ke Vercel. Ikuti langkah berikut:
 
-Atau gunakan Vercel CLI:
+### Via Vercel Dashboard (Recommended)
+
+1. Push code ke GitHub repository: `https://github.com/kkdev20/demo-porto.git`
+2. Login ke [Vercel](https://vercel.com)
+3. Klik "New Project"
+4. Import repository `demo-porto`
+5. Vercel akan auto-detect konfigurasi:
+   - **Framework Preset:** Other (Static Site)
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+6. Klik "Deploy"
+
+### Via Vercel CLI
+
 ```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Login
+vercel login
+
+# Deploy
 vercel
+
+# Deploy to production
+vercel --prod
 ```
+
+### Catatan Penting
+
+- Project ini menggunakan **static generation** (SPA mode)
+- API calls akan langsung ke external API (sudah ada fallback di code)
+- ServerMiddleware tidak akan bekerja di static deployment, tapi sudah ada fallback ke direct API URL
 
 ## API Endpoint
 

@@ -1,14 +1,14 @@
 export default {
   // Global page headers
   head: {
-    title: 'MT5 Equity Tor Monitor',
+    title: 'Portfolio Analytics Platform',
     htmlAttrs: {
       lang: 'en'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'MT5 Equity Tor Monitor' }
+      { hid: 'description', name: 'description', content: 'Advanced real-time portfolio analytics and performance monitoring for institutional investors and fund managers' }
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' }
