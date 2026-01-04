@@ -9,6 +9,15 @@
       </div>
       <div class="flex items-center space-x-2">
         <select 
+          v-model="chartType" 
+          @change="renderChart"
+          class="text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option value="line">Line</option>
+          <option value="bar">Bar</option>
+          <option value="area">Area</option>
+        </select>
+        <select 
           v-model="selectedPeriod" 
           @change="fetchGrowthData"
             class="text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -91,6 +100,7 @@ export default {
       loading: false,
       error: null,
       selectedPeriod: '30',
+      chartType: 'line',
       totalProfit: 0,
       totalTrades: 0,
       winRate: 0,
@@ -268,6 +278,10 @@ export default {
       
       const cumulativeData = this.chartData.map(d => d.cumulative)
       
+      // Determine chart type (area is line with fill)
+      const actualChartType = this.chartType === 'area' ? 'line' : this.chartType
+      const isArea = this.chartType === 'area'
+      
       // Create gradient for border (line) - Vertical gradient (top to bottom)
       const borderGradient = ctx.createLinearGradient(0, 0, 0, 300)
       borderGradient.addColorStop(0, '#3b82f6')      // Blue
@@ -286,29 +300,57 @@ export default {
       fillGradient.addColorStop(0.8, 'rgba(236, 72, 153, 0.2)')    // Pink
       fillGradient.addColorStop(1, 'rgba(245, 158, 11, 0.15)')    // Amber
       
+      // Bar chart gradient (horizontal)
+      let barGradient = null
+      if (actualChartType === 'bar') {
+        barGradient = ctx.createLinearGradient(0, 0, 0, 300)
+        barGradient.addColorStop(0, 'rgba(59, 130, 246, 0.8)')
+        barGradient.addColorStop(0.2, 'rgba(6, 182, 212, 0.7)')
+        barGradient.addColorStop(0.4, 'rgba(16, 185, 129, 0.7)')
+        barGradient.addColorStop(0.6, 'rgba(139, 92, 246, 0.7)')
+        barGradient.addColorStop(0.8, 'rgba(236, 72, 153, 0.7)')
+        barGradient.addColorStop(1, 'rgba(245, 158, 11, 0.7)')
+      }
+      
+      // Prepare dataset configuration based on chart type
+      let datasetConfig = {}
+      
+      if (actualChartType === 'bar') {
+        datasetConfig = {
+          label: 'Cumulative Profit',
+          data: cumulativeData,
+          backgroundColor: barGradient,
+          borderColor: '#3b82f6',
+          borderWidth: 1,
+          borderRadius: 4,
+          borderSkipped: false
+        }
+      } else {
+        // Line or Area chart
+        datasetConfig = {
+          label: 'Cumulative Profit',
+          data: cumulativeData,
+          borderColor: borderGradient,
+          backgroundColor: isArea ? fillGradient : 'transparent',
+          borderWidth: 2,
+          fill: isArea,
+          tension: 0.4,
+          pointRadius: actualChartType === 'line' ? 3 : 0,
+          pointHoverRadius: actualChartType === 'line' ? 5 : 4,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: borderGradient,
+          pointBorderWidth: 1.5,
+          pointHoverBackgroundColor: '#fff',
+          pointHoverBorderColor: '#3b82f6',
+          pointHoverBorderWidth: 3
+        }
+      }
+      
       this.chart = new this.Chart(ctx, {
-        type: 'line',
+        type: actualChartType,
         data: {
           labels,
-          datasets: [
-            {
-              label: 'Cumulative Profit',
-              data: cumulativeData,
-              borderColor: borderGradient,
-              backgroundColor: fillGradient,
-              borderWidth: 2,
-              fill: true,
-              tension: 0.4,
-              pointRadius: 3,
-              pointHoverRadius: 5,
-              pointBackgroundColor: '#fff',
-              pointBorderColor: borderGradient,
-              pointBorderWidth: 1.5,
-              pointHoverBackgroundColor: '#fff',
-              pointHoverBorderColor: '#3b82f6',
-              pointHoverBorderWidth: 3
-            }
-          ]
+          datasets: [datasetConfig]
         },
         options: {
           responsive: true,
