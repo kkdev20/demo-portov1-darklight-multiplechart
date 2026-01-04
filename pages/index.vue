@@ -58,8 +58,8 @@
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6">
       <!-- Tor Monitor Ketua CTA -->
-      <div class="relative overflow-hidden mb-4 sm:mb-6">
-        <div class="relative bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl animate-float" style="animation: float 3s ease-in-out infinite;">
+      <div class="relative overflow-hidden mb-4 sm:mb-6 rounded-xl sm:rounded-2xl">
+        <div class="relative bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 p-4 sm:p-6 shadow-xl animate-float" style="animation: float 3s ease-in-out infinite;">
           <!-- Shimmer Effect -->
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" 
                style="background-size: 200% 100%; animation: shimmer 3s infinite linear;"></div>
