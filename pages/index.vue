@@ -237,19 +237,20 @@ export default {
       userTimeZone: '',
       initialBalance: 12096.00,
       loadingSummary: false,
-      isDarkMode: false
+      isDarkMode: true
     }
   },
   async mounted() {
-    // Load dark mode preference from localStorage
+    // Load dark mode preference from localStorage (default to dark mode)
     if (process.client) {
       const savedTheme = localStorage.getItem('theme')
-      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        this.isDarkMode = true
-        document.documentElement.classList.add('dark')
-      } else {
+      if (savedTheme === 'light') {
         this.isDarkMode = false
         document.documentElement.classList.remove('dark')
+      } else {
+        // Default to dark mode if no preference saved
+        this.isDarkMode = true
+        document.documentElement.classList.add('dark')
       }
     }
     this.detectTimeZone()
