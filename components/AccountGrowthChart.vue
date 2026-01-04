@@ -129,11 +129,16 @@ export default {
         this.Chart = chartModule.Chart
         const { registerables } = chartModule
         this.Chart.register(...registerables)
+        // Wait for Chart.js to load before fetching data
+        await this.fetchGrowthData()
       } catch (error) {
         this.error = 'Failed to load chart library'
+        this.loading = false
       }
+    } else {
+      // If not client-side, still fetch data (for SSR)
+      await this.fetchGrowthData()
     }
-    this.fetchGrowthData()
   },
   beforeUnmount() {
     if (this.chart) {
@@ -165,13 +170,19 @@ export default {
         // Gunakan proxy endpoint dari Nuxt server
         const apiUrl = `/api/history?${queryParams}`
         
+        // Add timeout to prevent hanging
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+        
         const response = await fetch(apiUrl, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-          }
+          },
+          signal: controller.signal
         })
+        clearTimeout(timeoutId)
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`)
@@ -191,7 +202,11 @@ export default {
           this.chartData = []
         }
       } catch (err) {
-        this.error = 'Error loading data: ' + err.message
+        if (err.name === 'AbortError') {
+          this.error = 'Request timeout. Please try again.'
+        } else {
+          this.error = 'Error loading data: ' + (err.message || 'Unknown error')
+        }
         this.chartData = []
       } finally {
         this.loading = false
@@ -249,14 +264,15 @@ export default {
           if (this.chartCanvas) {
             this.renderChart()
           } else {
+            // If canvas still not ready, try once more then give up
             setTimeout(() => {
               this.chartCanvas = this.$refs.chartCanvas
               if (this.chartCanvas) {
                 this.renderChart()
               }
-            }, 200)
+            }, 100)
           }
-        }, 150)
+        }, 50)
       })
     },
     
